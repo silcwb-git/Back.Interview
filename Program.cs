@@ -9,9 +9,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configurar logging detalhado
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+
 // Registrar dependências
 builder.Services.AddScoped<IDataInterviewRepository, DataInterviewRepository>();
 builder.Services.AddScoped<IGetInterviewUseCase, GetInterviewUseCase>();
+builder.Services.AddScoped<IConcurrencyService, ConcurrencyService>();
 
 var app = builder.Build();
 
